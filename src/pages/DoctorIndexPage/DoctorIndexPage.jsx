@@ -1,9 +1,8 @@
 import "./DoctorIndexPage.css";
 import femaleDoctor from "../../assets/images/doctor_F.png";
 import maleDoctor from "../../assets/images/doctor_M.png";
-import DoctorDetailPage from "../DoctorDetailPage/DoctorDetailPage";
 // IMPORTS
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
 // APIs
@@ -29,10 +28,6 @@ export default function DoctorIndexPage() {
       navigate(`/doctor/${doctorId}`);
     };
       
-  
-
-
-
 
   return (
     <div className="doctors-index-page">

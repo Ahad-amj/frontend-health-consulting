@@ -9,9 +9,10 @@ import AboutPage from "../AboutPage/AboutPage";
 import HomePage from "../HomePage/HomePage";
 import DoctorIndexPage from "../DoctorIndexPage/DoctorIndexPage";
 import DoctorDetailPage from "../DoctorDetailPage/DoctorDetailPage";
+import MedicineIndexPage from "../MedicineIndexPage/MedicineIndexPage"
 
 export default function App() {
-  const routes = ["about", "doctors", "home"]
+  const routes = ["about", "doctors", "home", "medicines"]
   const location = useLocation();
   const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ")
   return (
@@ -27,6 +28,7 @@ export default function App() {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/doctors">Doctors</Link></li>
+            <li><Link to="/medicines">pharmacy</Link></li>
           </ul>
         </nav>
       </header>
@@ -37,6 +39,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/doctors" element={<DoctorIndexPage />} />
           <Route path="/doctor/:id" element={<DoctorDetailPage />} />
+          <Route path="/medicines" element={<MedicineIndexPage />} />
         </Routes>
       </main>
     </>

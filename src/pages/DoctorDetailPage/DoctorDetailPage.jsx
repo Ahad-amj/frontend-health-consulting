@@ -2,6 +2,8 @@ import "./DoctorDetailPage.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import * as doctorAPI from "../../utilities/doctor-api"
+import femaleDoctor from "../../assets/images/doctor_F.png";
+import maleDoctor from "../../assets/images/doctor_M.png";
 
 
 export default function DoctorDetailPage() {
@@ -25,10 +27,17 @@ export default function DoctorDetailPage() {
 
   return (
     <div className="doctor-detail">
+    <img
+      src={doctorDetail.gender === "F" ? femaleDoctor : maleDoctor}
+      alt={doctorDetail.name}
+      className="doctor-detail-img"
+    />
+    <div className="doctor-detail-info">
       <h2>{doctorDetail.name}</h2>
-      <p>Specialization: {doctorDetail.specialization}</p>
-      <p>Hospital: {doctorDetail.hospital_affiliation}</p>
-      <p>Years of Experience: {doctorDetail.years_of_experience}</p>
+      <p><span>Specialization:</span> {doctorDetail.specialization}</p>
+      <p><span>Hospital:</span> {doctorDetail.hospital_affiliation}</p>
+      <p><span>Years of Experience:</span> {doctorDetail.years_of_experience}</p>
     </div>
+  </div>
   )
 }

@@ -1,0 +1,59 @@
+  h1 {
+    font-size: 2.5rem;
+    color: #289076;
+    font-weight: bold;
+    padding-bottom: 50px;
+  }
+  
+  .medicine-index-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .medicines-index-card {
+    background-color: #ffffff;
+    border: 1px solid #dce3ec;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 280px;
+    transition: transform 0.2s;
+  }
+  
+  .medicines-index-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .medicines-index-card-content {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .medicines-index-card-content span{
+    font-style: italic;
+    color: #2e7d32;
+    font-weight: bold;
+  }
+  .usr-img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+  
+  .medicines-index-card-content h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+  }
+  
+  .medicines-index-card-content p {
+    font-size: 0.95rem;
+    color: #333;
+    margin: 0.3rem 0;
+  }
+  
