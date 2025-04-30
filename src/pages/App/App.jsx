@@ -1,16 +1,23 @@
+//IMPORTS
 import "./App.css";
 import { Route, Routes, Link } from "react-router"; 
+import { Navigate, useLocation } from "react-router";
+//IMAGES
 import logo from "../../assets/images/logo.png"; 
+//PAGES
 import AboutPage from "../AboutPage/AboutPage";
 import HomePage from "../HomePage/HomePage";
 import DoctorIndexPage from "../DoctorIndexPage/DoctorIndexPage";
 import DoctorDetailPage from "../DoctorDetailPage/DoctorDetailPage";
 
 export default function App() {
+  const routes = ["about", "doctors", "home"]
+  const location = useLocation();
+  const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ")
   return (
     <>
       <header className="header">
-        <div className="header-logo-container">
+        <div className={`${mainCSS} header-logo-container`}>
           <Link to="/">
             <img src={logo} alt="HealthConsulting Logo" className="header-logo" />
           </Link>
@@ -23,9 +30,10 @@ export default function App() {
           </ul>
         </nav>
       </header>
-      <main>
+      <main className={mainCSS}>
         <Routes>
-          <Route path="/*" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/*" element={ <Navigate to="/home"/>}/>
           <Route path="/about" element={<AboutPage />} />
           <Route path="/doctors" element={<DoctorIndexPage />} />
           <Route path="/doctor/:id" element={<DoctorDetailPage />} />
