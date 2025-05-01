@@ -1,0 +1,67 @@
+.review-box {
+    width: 100%;
+  }
+  
+  .review-box h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  .review-box h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    text-align: left;
+    color:#023e8a;
+  }
+  
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .review-form textarea {
+    resize: vertical;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem; 
+    min-height: 150px;
+  }
+  
+  .review-form select {
+    width: 100px;
+    padding: 0.4rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .submit-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .review-form button:hover {
+    background-color: #3575b9;
+  }
+  
+  .review-list h4 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .review {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #5d83ab;
+    border-radius: 8px;
+  }
+  .review-rating {
+    text-align: left;
+  }
+  
+  .review .timestamp {
+    font-size: 0.85rem;
+    text-align: right;
+    color: #888;
+  }
