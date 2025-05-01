@@ -1,20 +1,26 @@
 //IMPORTS
 import "./App.css";
-import { Route, Routes, Link } from "react-router"; 
+import { Route, Routes, Link } from "react-router";
 import { Navigate, useLocation } from "react-router";
+import { useState } from "react";
+import { getUser } from '../../utilities/users-api';
 //IMAGES
-import logo from "../../assets/images/logo.png"; 
+import logo from "../../assets/images/logo.png";
 //PAGES
 import AboutPage from "../AboutPage/AboutPage";
 import HomePage from "../HomePage/HomePage";
 import DoctorIndexPage from "../DoctorIndexPage/DoctorIndexPage";
 import DoctorDetailPage from "../DoctorDetailPage/DoctorDetailPage";
 import MedicineIndexPage from "../MedicineIndexPage/MedicineIndexPage"
+import Navbar from '../../components/Navbar/Navbar';
+import SignupPage from '../SignupPage/SignupPage';
 
 export default function App() {
+  const [user, setUser] = useState(getUser());
   const routes = ["about", "doctors", "home", "medicines"]
   const location = useLocation();
   const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ")
+
   return (
     <>
       <header className="header">
@@ -24,22 +30,21 @@ export default function App() {
           </Link>
         </div>
         <nav>
-          <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/doctors">Doctors</Link></li>
-            <li><Link to="/medicines">pharmacy</Link></li>
+          <ul>
+            <Navbar user={user} setUser={setUser} />
           </ul>
         </nav>
+
       </header>
       <main className={mainCSS}>
         <Routes>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/*" element={ <Navigate to="/home"/>}/>
+          <Route path="/home" element={<HomePage user={user} setUser={setUser}/>} />
+          <Route path="/*" element={<Navigate to="/home" />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/doctors" element={<DoctorIndexPage />} />
           <Route path="/doctor/:id" element={<DoctorDetailPage />} />
           <Route path="/medicines" element={<MedicineIndexPage />} />
+          <Route path="/signup" element={<SignupPage user={user} setUser={setUser} />} />
         </Routes>
       </main>
     </>

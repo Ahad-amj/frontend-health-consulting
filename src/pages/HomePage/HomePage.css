@@ -29,6 +29,71 @@
     margin-top: 20px;
     line-height: 1.6;
   }
+
+  .login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container-login {
+    width: 320px;
+    padding: 30px;
+    background-color: #4c59b2;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .form-container-login h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .form-container-login p {
+    margin-bottom: 15px;
+  }
+  
+  .form-container-login label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  
+  .form-container-login input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+  }
+  
+  .form-container-login input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #a1c4fd;
+  }
+  
+  .btn.submit {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 1em;
+    background-color: #51bb99;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn.submit:hover {
+    background-color: #009ecb;
+  }
+  
+  
   
   @keyframes fadeIn {
     0% {

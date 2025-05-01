@@ -1,0 +1,51 @@
+nav {
+    background-color: #284f77; 
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    display: inline;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #2d8876;
+  }
+  
+  #logout-form {
+    display: inline;
+  }
+  
+  #logout-form button {
+    background-color: #208750;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #logout-form button:hover {
+    background-color: #196c40;
+  }
+  
