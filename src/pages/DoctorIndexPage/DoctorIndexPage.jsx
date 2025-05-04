@@ -4,7 +4,6 @@ import maleDoctor from "../../assets/images/doctor_M.png";
 // IMPORTS
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-
 // APIs
 import * as doctorAPI from "../../utilities/doctor-api";
 

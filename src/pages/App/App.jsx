@@ -2,7 +2,7 @@
 import "./App.css";
 import { Route, Routes, Link } from "react-router";
 import { Navigate, useLocation } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getUser } from '../../utilities/users-api';
 //IMAGES
 import logo from "../../assets/images/logo.png";
@@ -16,10 +16,18 @@ import Navbar from '../../components/Navbar/Navbar';
 import SignupPage from '../SignupPage/SignupPage';
 
 export default function App() {
-  const [user, setUser] = useState(getUser());
+  const [user, setUser] = useState(null);
   const routes = ["about", "doctors", "home", "medicines"]
   const location = useLocation();
   const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ")
+
+  useEffect(() => {
+    async function checkUser() {
+      const loggedInUser = await getUser()
+      setUser(loggedInUser)
+    }
+    checkUser()
+  }, [])
 
   return (
     <>
@@ -42,7 +50,7 @@ export default function App() {
           <Route path="/*" element={<Navigate to="/home" />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/doctors" element={<DoctorIndexPage />} />
-          <Route path="/doctor/:id" element={<DoctorDetailPage />} />
+          <Route path="/doctor/:id" element={<DoctorDetailPage user={user}/>} />
           <Route path="/medicines" element={<MedicineIndexPage />} />
           <Route path="/signup" element={<SignupPage user={user} setUser={setUser} />} />
         </Routes>
