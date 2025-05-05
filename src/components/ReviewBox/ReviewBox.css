@@ -65,3 +65,23 @@
     text-align: right;
     color: #888;
   }
+  .review {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+}
+
+.doctor-reply {
+    margin-top: 0.5em;
+    padding-left: 1em;
+    border-left: 3px solid #4caf50;
+    background-color: #f9f9f9;
+}
+
+.message-controls,
+.reply-controls {
+    margin-top: 0.5em;
+    display: flex;
+    gap: 0.5em;
+}

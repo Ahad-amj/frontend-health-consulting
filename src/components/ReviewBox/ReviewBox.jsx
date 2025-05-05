@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import * as reviewAPI from "../../utilities/review-api";
 import './ReviewBox.css';
+import ReviewMessage from "../Reviews/ReviewMessage";
+import ReviewReply from "../Reviews/ReviewReply";
 
 export default function ReviewBox({ doctorId, userRole }) {
     const [reviews, setReviews] = useState([]);
     const [message, setMessage] = useState("");
     const [rating, setRating] = useState(5);
     const [replyMessage, setReplyMessage] = useState("");
+
     const [editingReview, setEditingReview] = useState(null);
     const [editingReply, setEditingReply] = useState(null);
     const [editMessage, setEditMessage] = useState("");
+
 
     useEffect(() => {
         async function loadReviews() {
             try {
                 const data = await reviewAPI.getReviews(doctorId);
+                console.log(data, "load reviews")
                 setReviews(data);
             } catch (err) {
                 console.error(err);
+                setReviews([])
             }
         }
         if (doctorId) loadReviews();
@@ -27,6 +33,7 @@ export default function ReviewBox({ doctorId, userRole }) {
         evt.preventDefault();
         try {
             const newReview = await reviewAPI.submitReview(doctorId, { message: message, rating: rating });
+            console.log(newReview, "check new review")
             setReviews([...reviews, newReview]);
             setMessage('');
             setRating(5);
@@ -34,11 +41,11 @@ export default function ReviewBox({ doctorId, userRole }) {
             console.error(err);
         }
     }
-
-    async function handleEdit(reviewId) {
+    async function handleEdit(doctorId) {
         try {
-            const updatedReview = await reviewAPI.updateReview(reviewId, { message: editMessage });
-            setReviews(reviews.map(r => (r.id === reviewId ? updatedReview : r)));
+            const updatedReview = await reviewAPI.updateReview(doctorId, { message: editMessage, rating: rating });
+            console.log(updatedReview)
+            setReviews([...reviews, updatedReview]);
             setEditingReview(null);
             setEditMessage('');
         } catch (err) {
@@ -46,34 +53,6 @@ export default function ReviewBox({ doctorId, userRole }) {
         }
     }
 
-    async function handleDelete(reviewId) {
-        try {
-            await reviewAPI.deleteReview(reviewId);
-            setReviews(reviews.filter(r => r.id !== reviewId));
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    async function handleReplyEdit(reviewId) {
-        try {
-            const updatedReview = await reviewAPI.updateReply(reviewId, { reply: replyMessage });
-            setReviews(reviews.map(r => (r.id === reviewId ? updatedReview : r)));
-            setEditingReply(null);
-            setReplyMessage('');
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    async function handleReplyDelete(reviewId) {
-        try {
-            const updatedReview = await reviewAPI.deleteReply(reviewId);
-            setReviews(reviews.map(r => (r.id === reviewId ? updatedReview : r)));
-        } catch (err) {
-            console.error(err);
-        }
-    }
 
     return (
         <div className="review-box">
@@ -87,6 +66,14 @@ export default function ReviewBox({ doctorId, userRole }) {
                             required
                             placeholder="Write your inquiry here..."
                         />
+                        <h4>Rate the service here!</h4>
+                        <select value={rating} onChange={(evt) => setRating(Number(evt.target.value))}>
+                            {[1, 2, 3, 4, 5].map((r) => (
+                                <option key={r} value={r}>
+                                    {r}
+                                </option>
+                            ))}
+                        </select>
                         <div className="submit-button-wrapper">
                             <button type="submit">Submit</button>
                         </div>
@@ -101,58 +88,33 @@ export default function ReviewBox({ doctorId, userRole }) {
                 ) : (
                     reviews.map((r) => (
                         <div key={r.id} className="review">
-
-                            {editingReview === r.id ? (
-                                <>
-                                    <textarea
-                                        value={editMessage}
-                                        onChange={(e) => setEditMessage(e.target.value)}
-                                    />
-                                    <button onClick={() => handleEdit(r.id)}>Save</button>
-                                    <button onClick={() => setEditingReview(null)}>Cancel</button>
-                                </>
-                            ) : (
-                                <>
-                                    <p>{r.message}</p>
-                                    <p className="timestamp">Posted: {new Date(r.created_at).toLocaleString()}</p>
-                                    <p className="review-rating"><strong>Rating:</strong> {r.rating} ⭐</p>
-                                    {userRole === "patient" && (
-                                        <>
-                                            <button onClick={() => {
-                                                setEditingReview(r.id);
-                                                setEditMessage(r.message);
-                                            }}>Edit</button>
-                                            <button onClick={() => handleDelete(r.id)}>Delete</button>
-                                        </>
-                                    )}
-                                </>
-                            )}
-
-                            {userRole === "doctor" && editingReply === r.id ? (
-                                <>
-                                    <textarea
-                                        value={replyMessage}
-                                        onChange={(e) => setReplyMessage(e.target.value)}
-                                    />
-                                    <button onClick={() => handleReplyEdit(r.id)}>Save Reply</button>
-                                    <button onClick={() => setEditingReply(null)}>Cancel</button>
-                                </>
-                            ) : (
-                                <>
-                                    <p><em>Reply:</em> {r.reply || "No reply yet"}</p>
-                                    {userRole === "doctor" && (
-                                        <>
-                                            <button onClick={() => {
-                                                setEditingReply(r.id);
-                                                setReplyMessage(r.reply || "");
-                                            }}>
-                                                Edit Reply
-                                            </button>
-                                            <button onClick={() => handleReplyDelete(r.id)}>Delete Reply</button>
-                                        </>
-                                    )}
-                                </>
-                            )}
+                            <div className="review-message-box">
+                                <ReviewMessage
+                                    review={r}
+                                    userRole={userRole}
+                                    editingReview={editingReview}
+                                    setEditingReview={setEditingReview}
+                                    editMessage={editMessage}
+                                    setEditMessage={setEditMessage}
+                                    reviews={reviews}
+                                    setReviews={setReviews}
+                                    handleEdit={handleEdit}
+                                />
+                            </div>
+                            <div className="review-reply-box">
+                                <ReviewReply
+                                    review={r}
+                                    userRole={userRole}
+                                    editingReply={editingReply}
+                                    setEditingReply={setEditingReply}
+                                    replyMessage={replyMessage}
+                                    setReplyMessage={setReplyMessage}
+                                    reviews={reviews}
+                                    setReviews={setReviews}
+                                    handleEdit={handleEdit}
+                                    handleSubmit={handleSubmit}
+                                />
+                            </div>
                         </div>
                     ))
                 )}

@@ -8,12 +8,16 @@ import femaleDoctor from "../../assets/images/doctor_F.png";
 import maleDoctor from "../../assets/images/doctor_M.png";
 //PAGES
 import ReviewBox from "../../components/ReviewBox/ReviewBox";
+import PrescribeMedicine from "../../components/PrescribeMedicine/PrescribeMedicine";
+import PrescriptionDetail from "../../components/PrescriptionDetail/PrescriptionDetail";
 
 export default function DoctorDetailPage({ user }) {
   const [doctorDetail, setDoctorDetail] = useState(null);
   const { id } = useParams();
+  console.log(id, "doctor")
 
-  const userRole = user?.is_doctor ? "doctor" : "patient"; 
+
+  const userRole = user?.is_doctor ? "doctor" : "patient";
 
   useEffect(() => {
     async function getAndSetDetail() {
@@ -47,6 +51,10 @@ export default function DoctorDetailPage({ user }) {
       </div>
       <div className="doctor-review-section">
         <ReviewBox doctorId={id} userRole={userRole} />
+      </div>
+      <div className="doctor-prescribe-section">
+        <PrescribeMedicine doctorId={id}  />
+        <PrescriptionDetail doctorId={id}  />
       </div>
     </>
   )

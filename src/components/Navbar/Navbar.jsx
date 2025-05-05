@@ -6,9 +6,6 @@ import * as usersAPI from "../../utilities/users-api";
 export default function Navbar({ user, setUser }) {
     const navigate = useNavigate();
 
-    console.log("checking user in nav", user)
-
-    // will refresh state and set us back to home without a user
     function handleLogout() {
         usersAPI.logout()
         setUser(null);
