@@ -53,6 +53,13 @@ nav {
 main {
   padding: 40px;
   text-align: center;
+  display: flex;              
+  flex-direction: column;     
+  width: 100%;
+  min-height: 100vh;          
+  position: relative;         
+  overflow: auto;       
+  padding: 1rem; 
 }
 
 h2, h3 {

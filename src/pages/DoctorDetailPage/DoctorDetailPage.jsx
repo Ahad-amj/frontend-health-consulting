@@ -64,9 +64,9 @@ export default function DoctorDetailPage({ user }) {
         <div className="doctor-prescribe-section">
           <PrescribeMedicine doctorId={id} />
 
-          <h4>Select a patient to view their prescriptions:</h4>
+          <h4 className="select-patient-statement">Select a patient to view their prescriptions:</h4>
           <select onChange={(e) => setPresDetail(e.target.value)} value={presDetail || ""}>
-            <option value="">-- Select Patient --</option>
+            <option value=""> -- Select Patient -- </option>
             {uniquePatients?.map((patient) => (
               <option key={patient.id} value={patient.id}>
                 {patient.name}

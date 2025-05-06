@@ -17,9 +17,11 @@ const PrescribeMedicine = ({ doctorId }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log('useffect')
     async function fetchData() {
       try {
         const fetchedPatients = await doctorAPI.getPatientsOfDoctor(doctorId);
+        console.log("patients",fetchedPatients)
         const fetchedMedicines = await MedicineAPI.index();
         setPatients(fetchedPatients);
         setMedicines(fetchedMedicines);
@@ -41,7 +43,7 @@ const PrescribeMedicine = ({ doctorId }) => {
       return;
     }
     try {
-      await PrescriptionAPI.createPrescribeMedicine(patientId, medicineId, date_prescribed);
+      const data=await PrescriptionAPI.createPrescribeMedicine(patientId, medicineId, date_prescribed);
       setSuccessMessage("Medicine prescribed successfully!");
       setError(null);
     } catch (error) {

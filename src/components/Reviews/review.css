@@ -1,0 +1,64 @@
+.rating{
+    text-align: left;
+}
+.message-actions {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 8px; 
+    margin-top: 5px;
+  }
+  
+  .edit-message,
+  .delete-message {
+    padding: 4px 10px;
+    cursor: pointer;
+    color:rgb(88, 88, 162);
+    border-color:rgb(88, 88, 162) ;
+  }
+  .edit-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px; 
+    margin-top: 5px;
+  }
+  
+  .edit-controls button {
+    padding: 4px 10px;
+    cursor: pointer;
+    color:rgb(88, 88, 162);
+    border-color:rgb(88, 88, 162) ;
+  }
+  .edit-message-again{
+    resize: vertical;
+    padding: 0.75rem;
+    width: 500px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem; 
+    min-height: 150px;
+    font-size: 20px;
+    border-color: rgb(72, 70, 206);
+  }
+  .message-text{
+    font-size: 20px; 
+  }
+  .edit-message:hover {
+    background-color: #2472b1; 
+    color: white;
+}
+
+.delete-message:hover {
+    background-color: #c8453c; 
+    color: white;
+}
+
+.edit-controls button:hover {
+    background-color: #6daf6f; 
+    color: white;
+}
+
+.edit-controls button:nth-child(2):hover {
+    background-color: #9e9e9e; 
+    color: white;
+}
+  

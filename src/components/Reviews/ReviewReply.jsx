@@ -1,4 +1,6 @@
 import * as reviewAPI from "../../utilities/review-api";
+import "./review.css";
+
 export default function ReviewReply({ review, reviews, handleSubmit, setReviews, userRole, editingReply, setEditingReply, replyMessage, setReplyMessage }) {
 
     async function handleReplyEdit(reviewId) {

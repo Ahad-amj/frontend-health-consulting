@@ -11,6 +11,7 @@ export default function ReviewBox({ doctorId, userRole }) {
     const [replyMessage, setReplyMessage] = useState("");
 
     const [editingReview, setEditingReview] = useState(null);
+    const [editRating, setEditRating] = useState(5);
     const [editingReply, setEditingReply] = useState(null);
     const [editMessage, setEditMessage] = useState("");
 
@@ -43,11 +44,17 @@ export default function ReviewBox({ doctorId, userRole }) {
     }
     async function handleEdit(doctorId) {
         try {
-            const updatedReview = await reviewAPI.updateReview(doctorId, { message: editMessage, rating: rating });
-            console.log(updatedReview)
-            setReviews([...reviews, updatedReview]);
+            const updatedReview = await reviewAPI.updateReview(doctorId, {
+                message: editMessage,
+                rating: editRating
+            });
+            const updatedReviews = reviews.map((r) =>
+                r.id === doctorId ? updatedReview : r
+            );
+            setReviews(updatedReviews);
             setEditingReview(null);
             setEditMessage('');
+            setEditRating(5);
         } catch (err) {
             console.error(err);
         }
@@ -96,12 +103,14 @@ export default function ReviewBox({ doctorId, userRole }) {
                                     setEditingReview={setEditingReview}
                                     editMessage={editMessage}
                                     setEditMessage={setEditMessage}
+                                    editRating={editRating}
+                                    setEditRating={setEditRating}
                                     reviews={reviews}
                                     setReviews={setReviews}
                                     handleEdit={handleEdit}
                                 />
                             </div>
-                            <div className="review-reply-box">
+                            {/* <div className="review-reply-box">
                                 <ReviewReply
                                     review={r}
                                     userRole={userRole}
@@ -114,7 +123,7 @@ export default function ReviewBox({ doctorId, userRole }) {
                                     handleEdit={handleEdit}
                                     handleSubmit={handleSubmit}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     ))
                 )}

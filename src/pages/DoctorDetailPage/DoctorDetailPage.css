@@ -11,7 +11,7 @@
     background-color: #ffffff;
     position: absolute;
     left: 0;
-    top: 100px;
+    top: 30px;
   }
   
   .doctor-detail-img {
@@ -58,11 +58,17 @@
   }
   .doctor-prescribe-section {
     padding: 2rem;
-    background-color: #5fb3d1;
+    background-color: #55b6d8;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(72, 134, 113, 0.04);
     width: 100%;  
     max-width: 500px; 
+    position: absolute;
+    top: 310px;
+    overflow: auto;
+  }
+  .select-patient-statement {
+    color:#164a38
   }
   
   

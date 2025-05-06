@@ -16,6 +16,7 @@ const PrescriptionDetail = ({ presDetail, user }) => {
     async function fetchData() {
       try {
         const prescriptionData = await PrescriptionAPI.getPrescriptionDetail(presDetail);
+        console.log(prescriptionData)
         setPrescriptions(prescriptionData);
         if (isDoctor) {
           const medData = await MedicineAPI.index();
