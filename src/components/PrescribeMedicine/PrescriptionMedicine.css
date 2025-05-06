@@ -1,0 +1,71 @@
+/* PrescribeMedicine.css */
+
+.prescribe-medicine-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .prescribe-medicine-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .prescribe-medicine-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+  }
+  
+  .prescribe-medicine-select,
+  .prescribe-medicine-input-date {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .prescribe-medicine-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .prescribe-medicine-button:hover {
+    background-color: #45a049;
+  }
+  
+  .prescribe-medicine-button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  
+  .prescribe-medicine-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .prescribe-medicine-success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .prescribe-medicine-select:focus,
+  .prescribe-medicine-input-date:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  

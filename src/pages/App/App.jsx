@@ -14,13 +14,14 @@ import DoctorDetailPage from "../DoctorDetailPage/DoctorDetailPage";
 import MedicineIndexPage from "../MedicineIndexPage/MedicineIndexPage"
 import Navbar from '../../components/Navbar/Navbar';
 import SignupPage from '../SignupPage/SignupPage';
-// import PrescriptionDetail from "../../components/PrescriptionDetail/PrescriptionDetail";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const routes = ["about", "doctors", "home", "medicines","prescriptions"]
   const location = useLocation();
   const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ")
+
+  console.log(user)
 
   useEffect(() => {
     async function checkUser() {
@@ -53,7 +54,6 @@ export default function App() {
           <Route path="/doctors" element={<DoctorIndexPage />} />
           <Route path="/doctor/:id" element={<DoctorDetailPage user={user} />} />
           <Route path="/medicines" element={<MedicineIndexPage />} />
-          {/* <Route path="/prescriptions" element={<PrescriptionDetail />} /> */}
           <Route path="/signup" element={<SignupPage user={user} setUser={setUser} />} />
         </Routes>
       </main>

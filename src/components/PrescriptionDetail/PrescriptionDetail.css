@@ -1,0 +1,75 @@
+/* PrescriptionDetail.css */
+
+.prescription-detail-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .prescription-detail-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .prescription-detail-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .prescription-detail-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .prescription-detail-item span {
+    flex: 1;
+  }
+  
+  .prescription-detail-select {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .prescription-detail-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .prescription-detail-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .prescription-detail-button:hover {
+    background-color: #45a049;
+  }
+  
+  .prescription-detail-button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+
+  
+  .prescription-detail-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  

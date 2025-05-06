@@ -7,3 +7,6 @@ export async function index() {
 export function show(doctorId) {
     return sendRequest(`${url}${doctorId}/`);
 }
+export function getPatientsOfDoctor(doctorId) {
+    return sendRequest(`${url}${doctorId}/patients/`);
+}
