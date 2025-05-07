@@ -11,9 +11,9 @@ export default function ReviewBox({ doctorId, userRole }) {
     const [replyMessage, setReplyMessage] = useState("");
 
     const [editingReview, setEditingReview] = useState(null);
+    const [editMessage, setEditMessage] = useState("");
     const [editRating, setEditRating] = useState(5);
     const [editingReply, setEditingReply] = useState(null);
-    const [editMessage, setEditMessage] = useState("");
 
 
     useEffect(() => {
@@ -44,13 +44,9 @@ export default function ReviewBox({ doctorId, userRole }) {
     }
     async function handleEdit(doctorId) {
         try {
-            const updatedReview = await reviewAPI.updateReview(doctorId, {
-                message: editMessage,
-                rating: editRating
-            });
-            const updatedReviews = reviews.map((r) =>
-                r.id === doctorId ? updatedReview : r
-            );
+            const updatedReview = await reviewAPI.updateReview(doctorId, { message: editMessage, rating: editRating });
+            console.log(updatedReview, "update")
+            const updatedReviews = reviews.map((r) => r.id === doctorId ? updatedReview : r);
             setReviews(updatedReviews);
             setEditingReview(null);
             setEditMessage('');

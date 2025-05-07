@@ -9,6 +9,7 @@ const PrescriptionDetail = ({ presDetail, user }) => {
   const [editId, setEditId] = useState(null);
   const [newMedicineId, setNewMedicineId] = useState("");
   const [medicines, setMedicines] = useState([]);
+  console.log(presDetail,"p1")
 
   const isDoctor = user?.is_doctor;
 
@@ -16,7 +17,7 @@ const PrescriptionDetail = ({ presDetail, user }) => {
     async function fetchData() {
       try {
         const prescriptionData = await PrescriptionAPI.getPrescriptionDetail(presDetail);
-        console.log(prescriptionData)
+        console.log(prescriptionData, "data")
         setPrescriptions(prescriptionData);
         if (isDoctor) {
           const medData = await MedicineAPI.index();
