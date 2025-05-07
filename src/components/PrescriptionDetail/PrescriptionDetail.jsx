@@ -4,25 +4,22 @@ import * as MedicineAPI from "../../utilities/medicine-api";
 import './PrescriptionDetail.css';
 
 const PrescriptionDetail = ({ presDetail, user }) => {
-  const [prescriptions, setPrescriptions] = useState([]);
+  const [prescription, setPrescription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editId, setEditId] = useState(null);
   const [newMedicineId, setNewMedicineId] = useState("");
   const [medicines, setMedicines] = useState([]);
-  console.log(presDetail,"p1")
 
-  const isDoctor = user?.is_doctor;
+  // const isDoctor = user?.is_doctor;
 
   useEffect(() => {
     async function fetchData() {
       try {
         const prescriptionData = await PrescriptionAPI.getPrescriptionDetail(presDetail);
-        console.log(prescriptionData, "data")
-        setPrescriptions(prescriptionData);
-        if (isDoctor) {
-          const medData = await MedicineAPI.index();
-          setMedicines(medData);
-        }
+        console.log(prescriptionData, "Fetched Prescription Detail");
+        setPrescription(prescriptionData);
+        const medData = await MedicineAPI.index();
+        setMedicines(medData);
 
         setLoading(false);
       } catch (error) {
@@ -31,12 +28,13 @@ const PrescriptionDetail = ({ presDetail, user }) => {
     }
 
     if (presDetail) fetchData();
-  }, [presDetail, isDoctor]);
+  }, [presDetail]);
 
   const handleDelete = async (prescriptionId) => {
     try {
       await PrescriptionAPI.deletePrescription(prescriptionId);
-      setPrescriptions((prev) => prev.filter((p) => p.id !== prescriptionId));
+      setPrescription(null);
+      setMedicines('')
     } catch (error) {
       console.error("Error deleting prescription:", error);
     }
@@ -44,7 +42,7 @@ const PrescriptionDetail = ({ presDetail, user }) => {
 
   const handleEdit = (prescriptionId) => {
     setEditId(prescriptionId);
-    setNewMedicineId(""); 
+    setNewMedicineId("");
   };
 
   const handleSaveEdit = async (prescriptionId) => {
@@ -53,75 +51,84 @@ const PrescriptionDetail = ({ presDetail, user }) => {
       setEditId(null);
       setNewMedicineId("");
       const updatedData = await PrescriptionAPI.getPrescriptionDetail(presDetail);
-      setPrescriptions(updatedData);
+      setPrescription(updatedData);
     } catch (error) {
       console.error("Error updating prescription:", error);
     }
   };
 
-  if (loading) return <p>Loading prescriptions...</p>;
+  if (loading) return <p>Loading prescription...</p>;
+  if (!prescription) {
+    return (
+      <div className="prescription-detail-container">
+        <h3 className="prescription-detail-title">Prescription Details</h3>
+        <p>This prescription has been deleted.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="prescription-detail-container">
       <h3 className="prescription-detail-title">Prescription Details</h3>
-      {prescriptions.length === 0 ? (
-        <p>No prescriptions found for this patient.</p>
+      {!prescription ? (
+        <p>No prescription found.</p>
       ) : (
         <ul className="prescription-detail-list">
-          {prescriptions.map((prescription) => (
-            <li key={prescription.id} className="prescription-detail-item">
-              {editId === prescription.id ? (
-                <>
-                  <select
-                    className="prescription-detail-select"
-                    value={newMedicineId}
-                    onChange={(e) => setNewMedicineId(e.target.value)}
+          <li key={prescription.id} className="prescription-detail-item">
+            {editId === prescription.id ? (
+              <>
+                <select
+                  className="prescription-detail-select"
+                  value={newMedicineId}
+                  onChange={(e) => setNewMedicineId(e.target.value)}
+                >
+                  <option value="">Select Medicine</option>
+                  {medicines.map((med) => (
+                    <option key={med.id} value={med.id}>
+                      {med.name}
+                    </option>
+                  ))}
+                </select>
+                <div className="prescription-detail-buttons">
+                  <button
+                    className="prescription-detail-button"
+                    onClick={() => handleSaveEdit(prescription.id)}
                   >
-                    <option value="">Select Medicine</option>
-                    {medicines.map((med) => (
-                      <option key={med.id} value={med.id}>
-                        {med.name}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="prescription-detail-buttons">
-                    <button 
-                      className="prescription-detail-button" 
-                      onClick={() => handleSaveEdit(prescription.id)}
-                    >
-                      Save
-                    </button>
-                    <button 
-                      className="prescription-detail-button" 
-                      onClick={() => setEditId(null)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <span>{prescription.medicine.name} - {prescription.medicine.description}</span>
-                  {isDoctor && (
-                    <div className="prescription-detail-buttons">
-                      <button 
-                        className="prescription-detail-button" 
-                        onClick={() => handleEdit(prescription.id)}
-                      >
-                        Edit
-                      </button>
-                      <button 
-                        className="prescription-detail-button" 
-                        onClick={() => handleDelete(prescription.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </>
-              )}
-            </li>
-          ))}
+                    Save
+                  </button>
+                  <button
+                    className="prescription-detail-button"
+                    onClick={() => setEditId(null)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="prescribe-medicine-name">{prescription.medicine.name}</p>
+                <span> {prescription.medicine.description}</span>
+                {/* {isDoctor &&  */}
+                
+                <div className="prescription-detail-buttons">
+                  <button
+                    className="prescription-detail-button"
+                    onClick={() => handleEdit(prescription.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="prescription-detail-button"
+                    onClick={() => handleDelete(prescription.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+                
+                {/* } */}
+              </>
+            )}
+          </li>
         </ul>
       )}
     </div>

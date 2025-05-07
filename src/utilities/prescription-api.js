@@ -18,3 +18,8 @@ export function editPrescribeMedicine(prescriptionId, formData) {
 export function deletePrescription(prescriptionId) {
   return sendRequest(`/prescriptions/${prescriptionId}/`, 'DELETE');
 }
+
+export function getPatientPrescriptions(patientId) {
+  return sendRequest(`/prescriptions/patients/${patientId}/`);
+}
+

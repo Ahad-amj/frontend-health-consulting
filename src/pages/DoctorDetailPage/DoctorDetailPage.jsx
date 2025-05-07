@@ -16,7 +16,8 @@ import PrescriptionDetail from "../../components/PrescriptionDetail/Prescription
 export default function DoctorDetailPage({ user }) {
   const [doctorDetail, setDoctorDetail] = useState(null);
   const { id } = useParams();
-  const [myPrescriptions, setMyPrescriptions] = useState([]);
+  const [patientPrescriptions, setPatientPrescriptions] = useState([]);
+  const [myPatients, setMyPatients] = useState([])
   const [selectedPatientId, setSelectedPatientId] = useState(null);
   const [selectedPrescriptionId, setSelectedPrescriptionId] = useState(null);
 
@@ -25,10 +26,9 @@ export default function DoctorDetailPage({ user }) {
   useEffect(() => {
     async function getAndSetDetail() {
       try {
-        const doctor = await doctorAPI.show(id);
-        const doctorsPrescriptions = await prescriptionAPI.myPrescriptions(id);
-        setDoctorDetail(doctor);
-        setMyPrescriptions(doctorsPrescriptions);
+        const doctorData = await doctorAPI.show(id);
+        setMyPatients(doctorData.patients)
+        setDoctorDetail(doctorData.doctor);
       } catch (err) {
         console.log(err);
         setDoctorDetail(null);
@@ -37,15 +37,21 @@ export default function DoctorDetailPage({ user }) {
     if (id) getAndSetDetail();
   }, [id]);
 
-  const uniquePatients = [
-    ...new Map(myPrescriptions.map((p) => [p.patient.id, p.patient])).values(),
-  ];
+  async function getPatientPrescriptions() {
+    try {
+      const patientPrescrips = await prescriptionAPI.getPatientPrescriptions(selectedPatientId);
+      console.log(patientPrescrips, "patientPrescrips")
+      setPatientPrescriptions(patientPrescrips)
+    } catch (err) {
+      console.error(err, "error getting prescriptions")
+    }
+  }
+
+  function handleSetPrescriptionId(evt) {
+    if (evt.target.value) setSelectedPrescriptionId(evt.target.value);
+  }
 
   if (!doctorDetail) return <h3>Your doctor details will display soon</h3>;
-
-  const filteredPrescriptions = myPrescriptions.filter(
-    (prescription) => prescription.patient.id === selectedPatientId
-  );
 
   return (
     <>
@@ -72,29 +78,20 @@ export default function DoctorDetailPage({ user }) {
         <PrescribeMedicine doctorId={id} />
 
         <h4 className="select-patient-statement">Select a patient to view their prescriptions:</h4>
-        <select onChange={(e) => {
-          setSelectedPatientId(parseInt(e.target.value));
-          setSelectedPrescriptionId(null); 
-        }} value={selectedPatientId || ""}>
+        <select onChange={(e) => { setSelectedPatientId(e.target.value) }} value={selectedPatientId || ""}>
           <option value=""> -- Select Patient -- </option>
-          {uniquePatients?.map((patient) => (
-            <option key={patient.id} value={patient.id}>
-              {patient.name}
-            </option>
-          ))}
+          {myPatients?.map((p) => (<option key={p.id} value={p.id} onClick={getPatientPrescriptions}>{p.name}</option>))}
         </select>
         {selectedPatientId && (
           <>
             <h5>Select a prescription</h5>
-            <select onChange={(e) => setSelectedPrescriptionId(parseInt(e.target.value))} value={selectedPrescriptionId || ""}>
-              <option value=""> -- Select Prescription -- </option>
-              {myPrescriptions
-                .filter((p) => p.patient.id === selectedPatientId)
-                .map((prescription) => (
-                  <option key={prescription.id} value={prescription.id}>
-                    {`Prescription #${prescription.id} - ${prescription.date_prescribed}`}
-                  </option>
-                ))}
+            <select onChange={(e) => setSelectedPrescriptionId(e.target.value)} value={selectedPrescriptionId || ""}>
+              <option className="select-prescription" value=""> -- Select Prescription -- </option>
+              {patientPrescriptions.map((pre) => (
+                <option key={pre.id} value={pre.id}>
+                  {`Prescription #${pre.id} - ${pre.date_prescribed}`}
+                </option>
+              ))}
             </select>
           </>
         )}

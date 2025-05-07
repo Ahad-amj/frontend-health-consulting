@@ -1,73 +1,107 @@
-.prescription-detail-container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .prescription-detail-title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .prescription-detail-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .prescription-detail-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  .prescription-detail-item span {
-    flex: 1;
-  }
-  
-  .prescription-detail-select {
-    padding: 10px;
-    margin-right: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-  }
-  
-  .prescription-detail-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .prescription-detail-button {
-    padding: 8px 12px;
-    font-size: 14px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .prescription-detail-button:hover {
-    background-color: #45a049;
-  }
-  
-  .prescription-detail-button:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
-  }
+/* PrescriptionDetail.css */
 
-  
-  .prescription-detail-error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+.prescription-detail-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-in-out;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.prescription-detail-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  position: relative;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.prescription-detail-title::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background-color: #1976d2;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.prescription-detail-list {
+  list-style: none;
+  padding: 0;
+}
+
+.prescription-detail-item {
+  background: #f8f9fa;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border-left: 6px solid #2c76c1;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.prescription-detail-item:hover {
+  transform: scale(1.01);
+}
+
+.prescription-detail-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.prescription-detail-buttons {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.prescription-detail-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prescription-detail-button:first-child {
+  background-color: #75a8df; 
+}
+
+.prescription-detail-button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.prescription-detail-button:last-child {
+  background-color: #c4515c; 
+}
+
+.prescription-detail-button:last-child:hover {
+  background-color: #b02a37;
+}
+.prescribe-medicine-name{
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  
+  to {
+    opacity: 1;
+    transform: tra
+  }
+}
