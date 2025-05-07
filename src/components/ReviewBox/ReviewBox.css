@@ -85,3 +85,6 @@
     display: flex;
     gap: 0.5em;
 }
+#rate-select {
+  float: right;
+}

@@ -23,7 +23,7 @@ const PrescribeMedicine = ({ doctorId }) => {
         const fetchedPatients = await doctorAPI.getPatientsOfDoctor(doctorId);
         console.log("patients",fetchedPatients)
         const fetchedMedicines = await MedicineAPI.index();
-        
+
         setPatients(fetchedPatients);
         setMedicines(fetchedMedicines);
       } catch (err) {
@@ -106,3 +106,4 @@ const PrescribeMedicine = ({ doctorId }) => {
 };
 
 export default PrescribeMedicine;
+

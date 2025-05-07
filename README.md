@@ -6,7 +6,6 @@ The **Health Consulting App** is a full-stack web platform that enables seamless
 
 ### 👨‍⚕️ For Doctors:
 - View and manage comments received from patients
-- Reply to patient messages
 - View ratings and feedback
 - Prescribe medicines
 
@@ -14,7 +13,6 @@ The **Health Consulting App** is a full-stack web platform that enables seamless
 - Search and view doctors' profiles
 - Leave comments and ratings for doctors
 - Edit or delete own comments
-- Receive replies from doctors
 
 This platform aims to improve healthcare access by connecting users to trusted professionals, making communication, consultation, and prescriptions more efficient and digital-first.
 
@@ -47,7 +45,25 @@ It provides a user-friendly interface for both **doctors** and **patients** to i
 
 ---
 
-## 🚀 Installation Instructions (Docker)
+### Frontend Installation (Docker) 🖥️
+
+```bash
+1. **Clone the Repository**  
+   git clone <your-repository-url>  
+   cd <your-project-folder>
+
+2. **Build the Docker Image for Frontend**  
+   docker build -t frontend .
+
+3. **Run the Docker Container for Frontend**  
+   docker-compose up -d
+
+4. **Access the Frontend**  
+   The React frontend should now be running on localhost:3000.
+
+5. **Stopping the Docker Containers**  
+   docker-compose down
+```
 
 ## ❄️ IceBox Features
 
@@ -57,3 +73,4 @@ It provides a user-friendly interface for both **doctors** and **patients** to i
 - Add pagination or infinite scroll to Doctors and Medicines lists.
 - Add multilingual support for broader accessibility.
 - Responsive design enhancements for mobile and tablet views.
+- Add a feature that allows **doctors to reply to patient messages** within the app for personalized communication.

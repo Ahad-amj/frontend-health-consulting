@@ -8,18 +8,11 @@ export function submitReview(doctorId, formData) {
     return sendRequest(`/doctors/${doctorId}/reviews/`, 'POST', formData);
   }
 
-export function updateReview(doctorId, formData) {
-    return sendRequest(`/doctors/${doctorId}/reviews/`,'PUT', formData);
+export function updateReview(reviewId, formData) {
+    return sendRequest(`/reviews/${reviewId}/`,'PUT', formData);
 }
 
-export function deleteReview(doctorId) {
-      return sendRequest(`/doctors/${doctorId}/reviews/`, 'DELETE');
+export function deleteReview(reviewId) {
+      return sendRequest(`/reviews/${reviewId}/`, 'DELETE');
 }
 
-export function updateReply(reviewId, formData) {
-  return sendRequest(`/reviews/${reviewId}/reply/`, 'PUT', formData);
-}
-
-export function deleteReply(reviewId) {
-  return sendRequest(`/reviews/${reviewId}/reply/`, 'DELETE');
-}

@@ -3,7 +3,7 @@ import * as PrescriptionAPI from "../../utilities/prescription-api";
 import * as MedicineAPI from "../../utilities/medicine-api";
 import './PrescriptionDetail.css';
 
-const PrescriptionDetail = ({ presDetail, user }) => {
+const PrescriptionDetail = ({ presDetail, setPatientPrescriptions, patientPrescriptions, user }) => {
   const [prescription, setPrescription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editId, setEditId] = useState(null);
@@ -32,11 +32,12 @@ const PrescriptionDetail = ({ presDetail, user }) => {
 
   const handleDelete = async (prescriptionId) => {
     try {
-      await PrescriptionAPI.deletePrescription(prescriptionId);
+      setPatientPrescriptions(patientPrescriptions.filter(p => p.id !== prescriptionId))
+      PrescriptionAPI.deletePrescription(prescriptionId);
       setPrescription(null);
-      setMedicines('')
-    } catch (error) {
-      console.error("Error deleting prescription:", error);
+      setMedicines('');
+    } catch (err) {
+      console.error("Error deleting prescription:", err);
     }
   };
 
@@ -45,11 +46,13 @@ const PrescriptionDetail = ({ presDetail, user }) => {
     setNewMedicineId("");
   };
 
+  console.log(newMedicineId, "checking new medicine id")
   const handleSaveEdit = async (prescriptionId) => {
     try {
-      await PrescriptionAPI.editPrescribeMedicine(prescriptionId, { medicine: newMedicineId });
+      const newMedicine = await PrescriptionAPI.editPrescribeMedicine(prescriptionId, { medicine: newMedicineId });
+      console.log(newMedicine,"new")
       setEditId(null);
-      setNewMedicineId("");
+      setNewMedicineId(newMedicine);
       const updatedData = await PrescriptionAPI.getPrescriptionDetail(presDetail);
       setPrescription(updatedData);
     } catch (error) {

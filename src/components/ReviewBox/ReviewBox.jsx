@@ -8,12 +8,10 @@ export default function ReviewBox({ doctorId, userRole }) {
     const [reviews, setReviews] = useState([]);
     const [message, setMessage] = useState("");
     const [rating, setRating] = useState(5);
-    const [replyMessage, setReplyMessage] = useState("");
 
     const [editingReview, setEditingReview] = useState(null);
     const [editMessage, setEditMessage] = useState("");
     const [editRating, setEditRating] = useState(5);
-    const [editingReply, setEditingReply] = useState(null);
 
 
     useEffect(() => {
@@ -42,13 +40,15 @@ export default function ReviewBox({ doctorId, userRole }) {
             console.error(err);
         }
     }
-    async function handleEdit(doctorId) {
+    async function handleEdit(evt, reviewId) {
         try {
-            const updatedReview = await reviewAPI.updateReview(doctorId, { message: editMessage, rating: editRating });
+            evt.preventDefault()
+            console.log(reviewId)
+            const updatedReview = await reviewAPI.updateReview(reviewId, { message: editMessage, rating: editRating });
             console.log(updatedReview, "update")
-            const updatedReviews = reviews.map((r) => r.id === doctorId ? updatedReview : r);
+            const updatedReviews = reviews.map((r) => r.id === reviewId ? updatedReview : r);
             setReviews(updatedReviews);
-            setEditingReview(null);
+            setEditingReview(null);    
             setEditMessage('');
             setEditRating(5);
         } catch (err) {
@@ -70,7 +70,7 @@ export default function ReviewBox({ doctorId, userRole }) {
                             placeholder="Write your inquiry here..."
                         />
                         <h4>Rate the service here!</h4>
-                        <select value={rating} onChange={(evt) => setRating(Number(evt.target.value))}>
+                        <select id="rate-select" value={rating} onChange={(evt) => setRating(Number(evt.target.value))}>
                             {[1, 2, 3, 4, 5].map((r) => (
                                 <option key={r} value={r}>
                                     {r}
