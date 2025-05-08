@@ -54,7 +54,7 @@ export default function App() {
           <Route path="/doctors" element={<DoctorIndexPage />} />
           <Route path="/doctor/:id" element={<DoctorDetailPage user={user} />} />
           <Route path="/medicines" element={<MedicineIndexPage />} />
-          <Route path="/signup" element={<SignupPage user={user} setUser={setUser} />} />
+          <Route path="/signup" element={<SignupPage setUser={setUser} />} />
         </Routes>
       </main>
     </>

@@ -1,8 +1,7 @@
-# 🏥 Health Consulting App – Frontend
-
+# 🏥 Health Consulting App (DocLink) – Frontend
 ## 🌐 Project Description
 
-The **Health Consulting App** is a full-stack web platform that enables seamless interaction between **doctors** and **patients** for online medical consultations. Developed using **React** (frontend) and **Django REST Framework** (backend), the app delivers a user-friendly interface with secure data handling and a role-specific experience.
+The **DocLink** is Health Consulting App which is a full-stack web platform that enables seamless interaction between **doctors** and **patients** for online medical consultations. Developed using **React** (frontend) and **Django REST Framework** (backend), the app delivers a user-friendly interface with secure data handling and a role-specific experience.
 
 ### 👨‍⚕️ For Doctors:
 - View and manage comments received from patients

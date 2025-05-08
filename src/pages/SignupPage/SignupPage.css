@@ -46,14 +46,12 @@
   box-sizing: border-box;
 }
 
-/* ERROR MESSAGES */
 .form-container.signup p.error {
   color: rgb(216, 34, 34);
   font-size: 0.85em;
   margin-top: 4px;
 }
 
-/* SUBMIT BUTTON */
 .form-container.signup button {
   width: 100%;
   padding: 12px;
@@ -76,7 +74,6 @@
   background-color: #004080;
 }
 
-/* ANIMATIONS */
 @keyframes fadeIn {
   0% {
     opacity: 0;

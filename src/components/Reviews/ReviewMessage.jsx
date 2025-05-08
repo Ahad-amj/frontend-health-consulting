@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router";
 import * as reviewAPI from "../../utilities/review-api";
 import "./review.css";
 
 export default function ReviewMessage({ reviews, setReviews, review, userRole, editingReview, setEditingReview, editMessage, setEditMessage, handleEdit, editRating,setEditRating }) {
-    const navigate = useNavigate();
-
 
     async function handleDelete(reviewId) {
         try {

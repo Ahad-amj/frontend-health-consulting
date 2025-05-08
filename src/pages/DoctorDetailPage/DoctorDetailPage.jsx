@@ -47,9 +47,6 @@ export default function DoctorDetailPage({ user }) {
     }
   }
 
-  // function handleSetPrescriptionId(evt) {
-  //   if (evt.target.value) setSelectedPrescriptionId(evt.target.value);
-  // }
 
   if (!doctorDetail) return <h3>Your doctor details will display soon</h3>;
 
@@ -73,7 +70,6 @@ export default function DoctorDetailPage({ user }) {
         <ReviewBox doctorId={id} userRole={userRole} />
       </div>
 
-      {/* {user?.is_doctor && ( */}
       <div className="doctor-prescribe-section">
         <PrescribeMedicine doctorId={id} />
 
@@ -85,7 +81,7 @@ export default function DoctorDetailPage({ user }) {
         {selectedPatientId && (
           <>
             <h5>Select a prescription</h5>
-            <select className="select-pres"onChange={(e) => setSelectedPrescriptionId(e.target.value)} value={selectedPrescriptionId || ""}>
+            <select className="select-pres" onChange={(e) => setSelectedPrescriptionId(e.target.value)} value={selectedPrescriptionId || ""}>
               <option className="select-prescription" value=""> -- Select Prescription -- </option>
               {patientPrescriptions.map((pre) => (
                 <option key={pre.id} value={pre.id}>
@@ -99,7 +95,6 @@ export default function DoctorDetailPage({ user }) {
           <PrescriptionDetail presDetail={selectedPrescriptionId} patientPrescriptions={patientPrescriptions} setPatientPrescriptions={setPatientPrescriptions} user={user} />
         )}
       </div>
-      {/* )} */}
     </>
   );
 }

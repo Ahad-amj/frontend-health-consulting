@@ -9,7 +9,7 @@ import logo from "../../assets/images/logo.png";
 // APIs
 import * as usersAPI from "../../utilities/users-api.js"
 
-export default function SignupPage({ setUser, user}) {
+export default function SignupPage({ setUser }) {
     const navigate = useNavigate();
 
     const initialState = {

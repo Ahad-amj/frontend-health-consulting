@@ -106,20 +106,6 @@ export default function ReviewBox({ doctorId, userRole }) {
                                     handleEdit={handleEdit}
                                 />
                             </div>
-                            {/* <div className="review-reply-box">
-                                <ReviewReply
-                                    review={r}
-                                    userRole={userRole}
-                                    editingReply={editingReply}
-                                    setEditingReply={setEditingReply}
-                                    replyMessage={replyMessage}
-                                    setReplyMessage={setReplyMessage}
-                                    reviews={reviews}
-                                    setReviews={setReviews}
-                                    handleEdit={handleEdit}
-                                    handleSubmit={handleSubmit}
-                                />
-                            </div> */}
                         </div>
                     ))
                 )}
